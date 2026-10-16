@@ -1,12 +1,3 @@
-"""CSV Merger & Cleaner
-
-Merges several CSV files into one clean file:
-- detects the delimiter (comma, semicolon or tab)
-- normalizes column names (trims spaces, lowercase, underscores)
-- trims whitespace in every cell
-- removes empty rows and (optionally) duplicate rows
-- combines columns from all files, missing values stay empty
-"""
 import argparse
 import csv
 import sys
@@ -18,7 +9,6 @@ def normalize_header(name):
 
 
 def read_csv(path):
-    """Return (headers, rows) for one CSV file."""
     with open(path, newline="", encoding="utf-8-sig") as f:
         sample = f.read(4096)
         f.seek(0)
@@ -38,7 +28,6 @@ def read_csv(path):
 
 
 def clean(files, keep_duplicates=False):
-    """Merge and clean rows from all files. Returns (headers, rows, stats)."""
     all_headers, merged = [], []
     stats = {"files": 0, "read": 0, "empty": 0, "duplicates": 0}
     seen = set()
